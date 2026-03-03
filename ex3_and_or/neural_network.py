@@ -4,13 +4,19 @@ def step(z:float):
 
 # TODO 3: retorna o valor do produto interno de 2 vetores v1 e v2
 def dot(v1:list[float], v2:list[float]):
-    pass
+    assert len(v1) == len(v2)
+
+    z = 0
+    for i in range(len(v1)):
+        z += v1[i] * v2[i]
+    
+    return z
 
 # TODO 4: atualiza o treino do percetrão, agora para as duas features
 def train_perceptron(
-        X,
-        y_lab,
-        w,
+        X:list[list[int]],
+        y_lab:list[int],
+        w:list[float],
         max_epochs:float=1000,
         eta:float=.1
         ) -> list[float]:
@@ -24,15 +30,17 @@ def train_perceptron(
         mistakes = 0
 
         for i in range(len(X)):                 # itera sobre cada sample
-            z = w * x[i] + b 
-            y_pred = step(z) 
+            # X = [[,,], [,,], ...]
+            xi = X[i]
+            z = dot(w, xi)
+            y_pred = step(z)
 
             print(f"-> ( x = {xi[:2]}, y = {y_lab[i]} ):", end="\n\t")
             print(f"z = {z:6.3f} => step(z) = {y_pred} -> ", end="")
 
             if y_pred != y_lab[i]:
-                w = w - eta * (y_pred - y_lab[i]) * x[i]
-                b = b - eta * (y_pred - y_lab[i]) * 1
+                for j in range(len(w)):
+                    w[j] = w[j] - eta * (y_pred - y_lab[i]) * xi[j]
 
                 mistakes += 1
 

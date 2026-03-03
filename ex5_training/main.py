@@ -26,4 +26,4 @@ W = [W1T, W2T]
 W_xor = train_perceptron(X, y_xor, W, eta = 1, max_epochs=1000)
 print_gate(X, W_xor)
 
-# TODO 5: brinca com os parametros de treino: W, eta e max_epochs, até convergires o XOR
+# TODO 1: brinca com os parametros de treino: W, eta e max_epochs, até convergires o XOR
