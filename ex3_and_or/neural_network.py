@@ -31,8 +31,8 @@ def train_perceptron(
             print(f"z = {z:6.3f} => step(z) = {y_pred} -> ", end="")
 
             if y_pred != y_lab[i]:
-                w += eta * (y_lab[i] - y_pred) * x[i]
-                b += eta * (y_lab[i] - y_pred) * 1
+                w = w - eta * (y_pred - y_lab[i]) * x[i]
+                b = b - eta * (y_pred - y_lab[i]) * 1
 
                 mistakes += 1
 
